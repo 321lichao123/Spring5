@@ -8,6 +8,9 @@ package com.atguigu.srping5;
  * @Version 1.0
  */
 public class User {
+
+    private String username;
+
     public void add() {
         System.out.println("add......");
     }

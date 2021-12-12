@@ -1,8 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 配置User对象创建 -->
     <bean id="user" class="com.atguigu.srping5.User"></bean>
+
+    <!-- set方法注入属性 -->
+    <bean id="book" class="com.atguigu.srping5.Book">
+        <!--
+            使用property完成属性注入
+             name：类里面属性名称
+             value：向属性注入的值
+         -->
+        <property name="bookName" value="Java从入门到放弃"></property>
+        <property name="author" value="aabbcc"></property>
+        <!-- 设置null -->
+        <!--<property name="address">
+            <null></null>
+        </property>-->
+        <!--
+            属性值包含特殊符号
+                1、把<>进行转移：&lt; &gt;
+                2、把带有特殊符号内容写道CDATA: <![CDATA[<<南京>>]]>
+         -->
+        <property name="address">
+            <value><![CDATA[<<南京>>]]></value>
+        </property>
+    </bean>
+
+    <!-- p名称空间注入是对set注入的简化 -->
+    <!-- 1、添加一个约束：xmlns:p="http://www.springframework.org/schema/p" -->
+    <bean id="book1" class="com.atguigu.srping5.Book" p:bookName="九阳神功" p:author="阳顶天"></bean>
+
+    <!-- 有参构造注入属性 -->
+    <bean id="order" class="com.atguigu.srping5.Order">
+        <!--
+            使用constructor-arg完成有参构造
+             name：类里面属性名称
+             value：向属性注入的值
+         -->
+        <constructor-arg name="orderName" value="11111"></constructor-arg>
+        <constructor-arg name="address" value="中国南京"></constructor-arg>
+    </bean>
+
+    <!--外部bean的注入方式：-->
+    <!-- 1、service和dao对象创建   -->
+    <bean id="userService" class="com.atguigu.service.UserService">
+        <!--
+            2、注入userDao对象
+                name属性：类里面属性名称
+                ref属性：创建userDao对象bean标签id值
+        -->
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    <bean id="userDao" class="com.atguigu.dao.UserDaoImpl"></bean>
+
+
+    <!-- 内部bean的注入方式： -->
+    <!-- 1、创建emp对象 -->
+    <bean id="emp" class="com.atguigu.bean.Emp">
+        <!-- 2、设置两个普通属性    -->
+        <property name="empName" value="李超"></property>
+        <property name="empGender" value="男"></property>
+        <!-- 3、设置对象类型属性   -->
+        <property name="dept">
+            <bean id="dept" class="com.atguigu.bean.Dept">
+                <property name="deptName" value="IT部门"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- 级联赋值:第一种写法   -->
+    <bean id="emp1" class="com.atguigu.bean.Emp">
+        <!-- 2、设置两个普通属性    -->
+        <property name="empName" value="李超"></property>
+        <property name="empGender" value="男"></property>
+        <!-- 3、级联赋值   -->
+        <property name="dept" ref="dept1"></property>
+    </bean>
+    <bean id="dept1" class="com.atguigu.bean.Dept">
+        <property name="deptName" value="IT部门"></property>
+    </bean>
+    <!-- 级联赋值:第二种写法   -->
+    <bean id="emp2" class="com.atguigu.bean.Emp">
+        <!-- 2、设置两个普通属性    -->
+        <property name="empName" value="李超"></property>
+        <property name="empGender" value="男"></property>
+        <!-- 3、级联赋值   -->
+        <property name="dept" ref="dept2"></property>
+        <property name="dept.deptName" value="保安部部门"></property>
+    </bean>
+    <bean id="dept2" class="com.atguigu.bean.Dept">
+        <property name="deptName" value="IT部门"></property>
+    </bean>
 </beans>
