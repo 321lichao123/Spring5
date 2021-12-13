@@ -68,7 +68,21 @@
         <value>mysql</value>
     </util:list>
     <!-- 3、使用 -->
-    <bean id="book" class="com.atguigu.collectiontype.Book">
+    <!--
+        bean的默认情况是单实例(scope="singleton")，但也是可以设置多实例的scope="property"
+        当设置scope="singleton"的时候，加载spring配置文件的时候就会创建单实例对象
+        当设置scope="property"的时候，加载spring配置文件的时候不会创建对象，
+            而是等到调用getBean()方法才会调用创建对象
+    -->
+    <bean id="book" class="com.atguigu.collectiontype.Book" scope="prototype">
         <property name="bookName" ref="bookList"></property>
     </bean>
+
+    <bean id="mybean" class="com.atguigu.factory.MyBean"></bean>
+
+    <bean id="lifeBean" class="com.atguigu.bean.LifeBean" init-method="initMethod" destroy-method="destroyMethod">
+        <property name="name" value="张三"></property>
+    </bean>
+
+    <bean id="myBeanPost" class="com.atguigu.bean.MyBeanPost"></bean>
 </beans>

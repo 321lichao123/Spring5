@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+        自动扫描
+            如果扫描多个包，可以使用逗号(,)隔开
+            也可以使用扫描包的上层目录
+    -->
+    <context:component-scan base-package="com.atguigu"></context:component-scan>
+
+    <!--
+        use-default-filters:表示不适用默认的filter而使用自己配置的filter
+        type="annotation"表示filter的类型是注解
+        expression="org.springframework.stereotype.Controller" 表示只扫描Controller的注解
+    -->
+    <!--<context:component-scan base-package="com.atguigu" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>-->
+    <!--
+        expression="org.springframework.stereotype.Service"表示扫描com.atguigu下面除了Service注解的其他注解
+    -->
+    <!--<context:component-scan base-package="com.atguigu">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>-->
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!--
+        实现自动装配
+            bean标签属性autowire配置自动装配
+            autowire属性常用两个值：
+                byName根据属性名称注入: 但是需要注意：注入的bean的id需要跟类属性名称一样
+                byType根据属性类型注入：但是需要注意根据byType只能注入一个，如果多个会报错
+    -->
+    <bean id="emp" class="com.atguigu.autowire.Emp" autowire="byType">
+        <!-- 手动注入 -->
+        <!--<property name="dept" ref="dept"></property>-->
+    </bean>
+    <bean id="dept" class="com.atguigu.autowire.Dept"></bean>
+</beans>
