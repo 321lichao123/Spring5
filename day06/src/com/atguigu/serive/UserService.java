@@ -4,6 +4,7 @@ import com.atguigu.dao.UserDao;
 import com.atguigu.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @Date 2021/12/14 23:11
  * @Version 1.0
  */
+//@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED) // 可以添加到类上也可以添加到方法上
 @Service
-@Transactional(propagation = Propagation.REQUIRED) // 可以添加到类上也可以添加到方法上
 public class UserService {
 
     // 注入dao

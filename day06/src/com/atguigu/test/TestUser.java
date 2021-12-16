@@ -20,4 +20,12 @@ public class TestUser {
         UserService userService = context.getBean("userService", UserService.class);
         userService.accountMoney();
     }
+
+    @Test
+    public void accountTest2() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("bean1.xml");
+        System.out.println("context = " + context);
+        UserService userService = context.getBean("userService", UserService.class);
+        userService.accountMoney();
+    }
 }
